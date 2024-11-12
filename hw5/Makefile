@@ -1,4 +1,4 @@
-FILE = asgn6
+FILE = asgn5
 
 build: $(FILE).s
 	gcc -Wall -g $(FILE).s -o $(FILE) -lm -fno-pie -no-pie
