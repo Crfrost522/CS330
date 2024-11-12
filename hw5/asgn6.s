@@ -1,5 +1,8 @@
 .data               # start of data section
 # put any global or static variables here
+#setting A and B as global variables
+A: .quad 5          #  A = 5
+B: .quad 3          #  B = 3
 
 .section .rodata    # start of read-only data section
 # constants here, such as strings
@@ -24,12 +27,8 @@ movq %rsp, %rbp
 /* ---Problem 1: A * 5---*/
 # multiply a = 5 * b = 3, c is  = 15 (c being the result) 
 #setting up variables. A & B
-#a = 5
-movq $5, %rax    # moved 5 into rax
-#b = 5
-movq $3, %rbx    # b=3 in rbx
-#a*b multiply
-imulq %rbx       # multiplying rbx * rax so a * b. Result stored in rdx:rax
+movq A, %rax        # putting A into rax
+imulq $5, %rax      # multiplying A x 5 and store it in ra
  
 #printf sum of mult. is %D, c
 # save caller save registers.
@@ -46,8 +45,8 @@ call printf                    # printing result to terminal
 /* ---Problem 2: (A + B) - (A / B)---*/
 # using same variables from problem 1
 # add A + B   ,    A = 5    &    B = 3
-movq $5, %rax    # moved a(5) into rax
-movq $3, %rbx    # b=3 in rbx
+movq A, %rax    # moved a(5) into rax
+movq B, %rbx    # b=3 in rbx
 #add a + b so add rax + rbx
 addq %rbx, %rax  #A+B
 
@@ -56,7 +55,7 @@ addq %rbx, %rax  #A+B
 movq %rax, %r10
 
 # divide A / B
-movq $5, %rax   # puts 5 back into rax
+movq A, %rax   # puts 5 back into rax
 #sign extend
 cqto  #extends sign into rdx:rax
 #now  divide 
@@ -75,8 +74,8 @@ call printf              # printing result to terminal
 
 # using same variables from problem 1 & 2
 # subtract A - B   ,    A = 5    &    B = 3
-movq $5, %rax    # moved a(5) into rax
-movq $3, %rbx    # b=3 in rbx
+movq A, %rax    # moved a(5) into rax
+movq B, %rbx    # b=3 in rbx
 #add a + b so add rax + rbx
 subq %rbx, %rax  #A-B
 #need to store a-b in another register temp.
@@ -85,8 +84,8 @@ movq %rax, %r11
 
 #multiplication
 #now need to multiply A x B. used same code from prob 1.
-movq $5, %rax    # moved 5 into rax
-movq $3, %rbx    # b=3 in rbx
+movq A, %rax    # moved 5 into rax
+movq B, %rbx    # b=3 in rbx
 #a*b multiply
 imulq %rbx       # multiplying rbx * rax so a * b. Result stored in rdx:rax
 #add together now
