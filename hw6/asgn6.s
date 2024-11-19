@@ -38,7 +38,7 @@ myAddTwoNumbersFunction:            # labels the function myAddTwoNumbersFunctio
 	.text                           # returns us to the text code section
 	.globl	main                    # declaring the main funciton as global
 	.type	main, @function         # sets the label as a function
-main:
+main:                               # labels the main function
 .LFB1:                              # start of debug info for main
 	.cfi_startproc                  # marking the beginning of the main funtion
 	pushq	%rbp                    # saving base pointer to the stack in rbp reg
@@ -68,5 +68,5 @@ main:
 	.cfi_endproc                    # marking the end of the maing function 
 .LFE1:                              # end of debug infor for main
 	.size	main, .-main            # calculates the size of the main function                             
-	.ident	"GCC: (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0"
-	.section	.note.GNU-stack,"",@progbits
+	.ident	"GCC: (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0" # compiler vers. Helps with debugging
+	.section	.note.GNU-stack,"",@progbits           # warning to let user know that doesnt need stack to be executed
